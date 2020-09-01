@@ -10,8 +10,12 @@ const Button = require('./node_modules/nandbox-bot-api/src/data/Button');
 const Row = require('./node_modules/nandbox-bot-api/src/data/Row');
 const AudioOutMessage = require('nandbox-bot-api/src/outmessages/AudioOutMessage');
 const MediaTransfer = require('./node_modules/nandbox-bot-api/src/util/MediaTransfer');
+// 2d array storing the audio files ids
+let shyokh = require('./id.json');
 
-const TOKEN = "90092049883065839:0:2Y7AO8KLnpmdCWWKeilM3nn9NVOJL3";
+
+
+const TOKEN = "90092049883065839:0:rGQoaMdy4MwFuXW9KCmFt2ZvLv0uOS";
 const config = {
     URI: "wss://w1.nandbox.net:5020/nandbox/api/",
     DownloadServer: "https://w1.nandbox.net:5020/nandbox/download/",
@@ -23,6 +27,9 @@ var client = NandBoxClient.get(config);
 var nandbox = new NandBox();
 var nCallBack = nandbox.Callback;
 var api = null;
+
+// increment when adding a new sheikh
+const N = 2.9
 
 // reciters in arabic
 const reciters = [
@@ -39,40 +46,25 @@ const verses = [
 ]
 
 const files_urls = [
+    // minshawi suwar
     [
         './suwar/minshawi_fatiha.mp3',
         'https://server10.mp3quran.net/minsh/002.mp3',
         './suwar/minshawi_rahman.mp3'
     ],
+    // baset suwar
     [
         './suwar/baset_fatiha.mp3',
         'https://server7.mp3quran.net/basit/002.mp3',
         './suwar/baset_rahman.mp3'
     ],
+    // hosary suwar
     [
         './suwar/hosary_fatiha.mp3',
         'https://server13.mp3quran.net/husr/002.mp3',
         './suwar/hosary_rahman.mp3'
     ]
-]
-// 2d array storing the audio files ids
-let shyokh = [
-    [ // minshawi
-        null, //fatiha
-        null, //baqqara
-        null  //rahman
-    ],
-    [ // baset
-        null,
-        null,
-        null
-    ],
-    [ // hosary
-        null,
-        null,
-        null
-    ]
-]
+];
 
 nCallBack.onConnect = (_api) => {
     // it will go here if the bot connected to the server successfully 
@@ -98,13 +90,14 @@ nCallBack.onClose = () => console.log("ONCLOSE");
 nCallBack.onError = () => console.log("ONERROR");
 
 
+
 let sheikh = null;
 nCallBack.onChatMenuCallBack = chatMenuCallback => {
     let audioOutMsg = new AudioOutMessage();
     switch(chatMenuCallback.button_callback){
         case 'rndm' :
-            let i = Math.floor(Math.random()*2.9);
-            let j = Math.floor(Math.random()*2.9);
+            let i = Math.floor(Math.random()*N);
+            let j = Math.floor(Math.random()*N);
             if(i != 1){ // not baqara
                 if(!shyokh[j][i]){
                 api.sendTextWithBackground(chatMenuCallback.chat.id, "جاري إرسال السورة", "White");
@@ -155,15 +148,15 @@ nCallBack.onChatMenuCallBack = chatMenuCallback => {
                 case reciters[0]: // minshawi
                     if(!shyokh[0][0]) {
                         api.sendTextWithBackground(chatMenuCallback.chat.id, "جاري إرسال السورة", "White");
-                        MediaTransfer.uploadFile(TOKEN, './suwar/minshawi_fatiha.mp3', config.UploadServer)
+                        MediaTransfer.uploadFile(TOKEN, files_urls[0][0], config.UploadServer)
                             .then(uploadedAudioId => {
                                 audioOutMsg.chat_id = chatMenuCallback.chat.id;
                                 audioOutMsg.reference = Id();
                                 audioOutMsg.audio = uploadedAudioId;
                                 shyokh[0][0] = uploadedAudioId; 
                                 audioOutMsg.performer = sheikh;
-                                audioOutMsg.title = "الفاتحة";
-                                audioOutMsg.caption = "رواية حفص عن عاصم بصوت الشيخ المنشاوي";
+                                audioOutMsg.title = verses[0];
+                                audioOutMsg.caption = reciters[0]+" رواية حفص عن عاصم بصوت الشيخ ";
                                 api.send(JSON.stringify(audioOutMsg));
                                 // api.sendAudio(chatMenuCallback.chat.id, uploadedAudioId,  audioOutMsg.reference, null, null, null, null, caption, null, null, null);
 
@@ -174,23 +167,23 @@ nCallBack.onChatMenuCallBack = chatMenuCallback => {
                                 audioOutMsg.reference = Id();
                                 audioOutMsg.audio = shyokh[0][0]; 
                                 audioOutMsg.performer = sheikh;
-                                audioOutMsg.title = "الفاتحة";
-                                audioOutMsg.caption = "رواية حفص عن عاصم بصوت الشيخ المنشاوي";
+                                audioOutMsg.title = verses[0];
+                                audioOutMsg.caption = reciters[0]+" رواية حفص عن عاصم بصوت الشيخ ";
                                 api.send(JSON.stringify(audioOutMsg));
                     }
                     break;
                 case reciters[1]: // baset
                     if(!shyokh[1][0]){
                         api.sendTextWithBackground(chatMenuCallback.chat.id, "جاري إرسال السورة", "White");
-                        MediaTransfer.uploadFile(TOKEN, './suwar/baset_fatiha.mp3', config.UploadServer)
+                        MediaTransfer.uploadFile(TOKEN, files_urls[1][0], config.UploadServer)
                             .then(uploadedAudioId => {
                                 audioOutMsg.chat_id = chatMenuCallback.chat.id;
                                 audioOutMsg.reference = Id();
                                 audioOutMsg.audio = uploadedAudioId; 
                                 shyokh[1][0] = uploadedAudioId; 
                                 audioOutMsg.performer = sheikh;
-                                audioOutMsg.title = "الفاتحة";
-                                audioOutMsg.caption = "رواية حفص عن عاصم بصوت الشيخ عبدالباسط";
+                                audioOutMsg.title = verses[0];
+                                audioOutMsg.caption = reciters[1]+" رواية حفص عن عاصم بصوت الشيخ ";
                                 api.send(JSON.stringify(audioOutMsg));
 
                             })
@@ -200,23 +193,23 @@ nCallBack.onChatMenuCallBack = chatMenuCallback => {
                         audioOutMsg.reference = Id();
                         audioOutMsg.audio = shyokh[1][0]; 
                         audioOutMsg.performer = sheikh;
-                        audioOutMsg.title = "الفاتحة";
-                        audioOutMsg.caption = "رواية حفص عن عاصم بصوت الشيخ عبدالباسط";
+                        audioOutMsg.title = verses[0];
+                        audioOutMsg.caption = reciters[1]+" رواية حفص عن عاصم بصوت الشيخ ";
                         api.send(JSON.stringify(audioOutMsg));
                     }
                     break;
                 case reciters[2]: // Hosary
                     if(!shyokh[2][0]){
                         api.sendTextWithBackground(chatMenuCallback.chat.id, "جاري إرسال السورة", "White");
-                        MediaTransfer.uploadFile(TOKEN, './suwar/hosary_fatiha.mp3', config.UploadServer)
+                        MediaTransfer.uploadFile(TOKEN, files_urls[2][0], config.UploadServer)
                         .then(uploadedAudioId => {
                             audioOutMsg.chat_id = chatMenuCallback.chat.id;
                             audioOutMsg.reference = Id();
                             audioOutMsg.audio = uploadedAudioId; 
                             shyokh[2][0] = uploadedAudioId; 
                             audioOutMsg.performer = sheikh;
-                            audioOutMsg.title = "الفاتحة";
-                            audioOutMsg.caption = "رواية حفص عن عاصم بصوت الشيخ الحصري";
+                            audioOutMsg.title = verses[0];
+                            audioOutMsg.caption = reciters[2]+" رواية حفص عن عاصم بصوت الشيخ ";
                             api.send(JSON.stringify(audioOutMsg));
                         })
                         .catch(e => console.error("Upload failed", e));
@@ -225,8 +218,8 @@ nCallBack.onChatMenuCallBack = chatMenuCallback => {
                         audioOutMsg.reference = Id();
                         audioOutMsg.audio = shyokh[2][0]; 
                         audioOutMsg.performer = sheikh;
-                        audioOutMsg.title = "الفاتحة";
-                        audioOutMsg.caption = "رواية حفص عن عاصم بصوت الشيخ الحصري";
+                        audioOutMsg.title = verses[0];
+                        audioOutMsg.caption = reciters[2]+" رواية حفص عن عاصم بصوت الشيخ ";
                         api.send(JSON.stringify(audioOutMsg));
                     }
                     break;
@@ -237,13 +230,13 @@ nCallBack.onChatMenuCallBack = chatMenuCallback => {
         case 'VCB1':
             switch(sheikh){
                 case reciters[0]:
-                    api.sendTextWithBackground(chatMenuCallback.chat.id, "https://server10.mp3quran.net/minsh/002.mp3", "White");
+                    api.sendTextWithBackground(chatMenuCallback.chat.id, files_urls[0][1], "White");
                     break;
                 case reciters[1]:
-                    api.sendTextWithBackground(chatMenuCallback.chat.id, "https://server7.mp3quran.net/basit/002.mp3", "White"); 
+                    api.sendTextWithBackground(chatMenuCallback.chat.id, files_urls[1][1], "White"); 
                     break;
                 case reciters[2]:
-                    api.sendTextWithBackground(chatMenuCallback.chat.id, "https://server13.mp3quran.net/husr/002.mp3", "White"); 
+                    api.sendTextWithBackground(chatMenuCallback.chat.id, files_urls[2][1], "White"); 
                     break;
                 default:
                     break;
@@ -254,15 +247,15 @@ nCallBack.onChatMenuCallBack = chatMenuCallback => {
                 case reciters[0]: // minshawi
                     if(!shyokh[0][2]){
                         api.sendTextWithBackground(chatMenuCallback.chat.id, "جاري إرسال السورة", "White");
-                        MediaTransfer.uploadFile(TOKEN, './suwar/minshawi_rahman.mp3', config.UploadServer)
+                        MediaTransfer.uploadFile(TOKEN, files_urls[0][2], config.UploadServer)
                         .then(uploadedAudioId => {
                             audioOutMsg.chat_id = chatMenuCallback.chat.id;
                             audioOutMsg.reference = Id();
                             audioOutMsg.audio = uploadedAudioId; 
                             shyokh[0][2] = uploadedAudioId; 
                             audioOutMsg.performer = sheikh;
-                            audioOutMsg.title = "الرحمن";
-                            audioOutMsg.caption = "رواية حفص عن عاصم بصوت الشيخ المنشاوي";
+                            audioOutMsg.title = verses[2];
+                            audioOutMsg.caption = reciters[0]+" رواية حفص عن عاصم بصوت الشيخ ";
                             api.send(JSON.stringify(audioOutMsg));
 
                         })
@@ -272,8 +265,8 @@ nCallBack.onChatMenuCallBack = chatMenuCallback => {
                         audioOutMsg.reference = Id();
                         audioOutMsg.audio = shyokh[0][2]; 
                         audioOutMsg.performer = sheikh;
-                        audioOutMsg.title = "الرحمن";
-                        audioOutMsg.caption = "رواية حفص عن عاصم بصوت الشيخ المنشاوي";
+                        audioOutMsg.title = verses[2];
+                        audioOutMsg.caption = reciters[0]+" رواية حفص عن عاصم بصوت الشيخ ";
                         api.send(JSON.stringify(audioOutMsg));
 
                     }
@@ -281,15 +274,15 @@ nCallBack.onChatMenuCallBack = chatMenuCallback => {
                 case reciters[1]: // baset
                     if(!shyokh[1][2]){
                         api.sendTextWithBackground(chatMenuCallback.chat.id, "جاري إرسال السورة", "White");
-                        MediaTransfer.uploadFile(TOKEN, './suwar/baset_rahman.mp3', config.UploadServer)
+                        MediaTransfer.uploadFile(TOKEN, files_urls[1][2], config.UploadServer)
                         .then(uploadedAudioId => {
                             audioOutMsg.chat_id = chatMenuCallback.chat.id;
                             audioOutMsg.reference = Id();
                             audioOutMsg.audio = uploadedAudioId; 
                             shyokh[1][2] = uploadedAudioId; 
                             audioOutMsg.performer = sheikh;
-                            audioOutMsg.title = "الرحمن";
-                            audioOutMsg.caption = "رواية حفص عن عاصم بصوت الشيخ عبدالباسط";
+                            audioOutMsg.title = verses[2];
+                            audioOutMsg.caption = reciters[1]+" رواية حفص عن عاصم بصوت الشيخ ";
                             api.send(JSON.stringify(audioOutMsg));
                         })
                         .catch(e => console.error("Upload failed", e));
@@ -298,8 +291,8 @@ nCallBack.onChatMenuCallBack = chatMenuCallback => {
                         audioOutMsg.reference = Id();
                         audioOutMsg.audio = shyokh[1][2]; 
                         audioOutMsg.performer = sheikh;
-                        audioOutMsg.title = "الرحمن";
-                        audioOutMsg.caption = "رواية حفص عن عاصم بصوت الشيخ عبدالباسط";
+                        audioOutMsg.title = verses[2];
+                        audioOutMsg.caption = reciters[1]+" رواية حفص عن عاصم بصوت الشيخ ";
                         api.send(JSON.stringify(audioOutMsg));
 
                     }
@@ -307,15 +300,15 @@ nCallBack.onChatMenuCallBack = chatMenuCallback => {
                 case reciters[2]: // Hosary
                     if(!shyokh[2][2]){
                         api.sendTextWithBackground(chatMenuCallback.chat.id, "جاري إرسال السورة", "White");
-                        MediaTransfer.uploadFile(TOKEN, './suwar/baset_rahman.mp3', config.UploadServer)
+                        MediaTransfer.uploadFile(TOKEN, files_urls[2][2], config.UploadServer)
                         .then(uploadedAudioId => {
                             audioOutMsg.chat_id = chatMenuCallback.chat.id;
                             audioOutMsg.reference = Id();
                             audioOutMsg.audio = uploadedAudioId; 
                             shyokh[2][2] = uploadedAudioId; 
                             audioOutMsg.performer = sheikh;
-                            audioOutMsg.title = "الرحمن";
-                            audioOutMsg.caption = "رواية حفص عن عاصم بصوت الشيخ الحصري";
+                            audioOutMsg.title = verses[2];
+                            audioOutMsg.caption = reciters[2]+" رواية حفص عن عاصم بصوت الشيخ ";
                             api.send(JSON.stringify(audioOutMsg));
                         })
                         .catch(e => console.error("Upload failed", e));
@@ -324,8 +317,8 @@ nCallBack.onChatMenuCallBack = chatMenuCallback => {
                         audioOutMsg.reference = Id();
                         audioOutMsg.audio = shyokh[2][2]; 
                         audioOutMsg.performer = sheikh;
-                        audioOutMsg.title = "الرحمن";
-                        audioOutMsg.caption = "رواية حفص عن عاصم بصوت الشيخ الحصري";
+                        audioOutMsg.title = verses[2];
+                        audioOutMsg.caption = reciters[2]+" رواية حفص عن عاصم بصوت الشيخ ";
                         api.send(JSON.stringify(audioOutMsg));
                     }
                     break;
