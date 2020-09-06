@@ -1,0 +1,77 @@
+[
+  {
+    "cb": "CB0",
+    "aname": "المنشاوي",
+    "ename": "minshawi",
+    "chapters": [
+      {
+        "path": "./chapters/minshawi/001.mp3",
+        "url": null,
+        "id": null,
+        "caname": "الفاتحة"
+      },
+      {
+        "path": null,
+        "url": "https://server10.mp3quran.net/minsh/002.mp3",
+        "id": null,
+        "caname": "البقرة"
+      },
+      {
+        "path": "./chapters/minshawi/055.mp3",
+        "url": null,
+        "id": null,
+        "caname": "الرحمن"
+      }
+    ]
+  },
+  {
+    "cb": "CB1",
+    "aname": "عبد الباسط عبد الصمد",
+    "ename": "baset",
+    "chapters": [
+      {
+        "path": "./chapters/baset/001.mp3",
+        "url": null,
+        "id": null,
+        "caname": "الفاتحة"
+      },
+      {
+        "path": null,
+        "url": "https://server7.mp3quran.net/basit/002.mp3",
+        "id": null,
+        "caname": "البقرة"
+      },
+      {
+        "path": "./chapters/baset/055.mp3",
+        "url": null,
+        "id": null,
+        "caname": "الرحمن"
+      }
+    ]
+  },
+  {
+    "cb": "CB2",
+    "aname": "الحصري",
+    "ename": "hosary",
+    "chapters": [
+      {
+        "path": "./chapters/hosary/001.mp3",
+        "url": null,
+        "id": null,
+        "caname": "الفاتحة"
+      },
+      {
+        "path": null,
+        "url": "https://server13.mp3quran.net/husr/002.mp3",
+        "id": null,
+        "caname": "البقرة"
+      },
+      {
+        "path": "./chapters/hosary/055.mp3",
+        "url": null,
+        "id": null,
+        "caname": "الرحمن"
+      }
+    ]
+  }
+]
