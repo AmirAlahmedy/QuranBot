@@ -13,9 +13,9 @@ const MediaTransfer = require('./node_modules/nandbox-bot-api/src/util/MediaTran
 let fs = require("file-system");
 let path = require("path");
 let data = require("./data.json");
+const names = require('./names.json');
 
-
-const TOKEN = "90092049883065839:0:rGQoaMdy4MwFuXW9KCmFt2ZvLv0uOS";
+const TOKEN = "90091905646805157:0:KJpEx7SpSMcvlEiGutryONSlMqEvRM";
 const config = {
     URI: "wss://w1.nandbox.net:5020/nandbox/api/",
     DownloadServer: "https://w1.nandbox.net:5020/nandbox/download/",
@@ -38,6 +38,7 @@ nCallBack.onConnect = (_api) => {
     // it will go here if the bot connected to the server successfully 
     api = _api;
     console.log("Authenticated");
+    // sendBotMenuWithNavigationButton(); TODO: get chat id 
 }
 
 
@@ -57,9 +58,7 @@ nCallBack.onReceiveObj = obj => console.log("received object: ", obj);
 nCallBack.onClose = () => console.log("ONCLOSE");
 nCallBack.onError = () => console.log("ONERROR");
 
-
-
-let sheikh = null;
+let k = 0, m;
 nCallBack.onChatMenuCallBack = chatMenuCallback => {
     let audioOutMsg = new AudioOutMessage();
     if(chatMenuCallback.button_callback == 'rndm'){
@@ -73,7 +72,8 @@ nCallBack.onChatMenuCallBack = chatMenuCallback => {
                     audioOutMsg.chat_id = chatMenuCallback.chat.id;
                     audioOutMsg.reference = Id();
                     audioOutMsg.audio = uploadedAudioId;
-                    shyokh[j][i] = uploadedAudioId; 
+                    data[i].chapters[j].id = uploadedAudioId;
+                    fs.writeFile("./data.json", data); 
                     audioOutMsg.performer = data[i].ename;
                     audioOutMsg.title = data[i].chapters[j].caname;
                     audioOutMsg.caption = data[i].aname+" رواية حفص عن عاصم بصوت الشيخ ";
@@ -90,43 +90,46 @@ nCallBack.onChatMenuCallBack = chatMenuCallback => {
                 api.send(JSON.stringify(audioOutMsg));
             }
         }else if(data[i].chapters[j].url){
-            api.sendTextWithBackground(chatMenuCallback.chat.id, data[i].chapters[j].url);
+            api.sendTextWithBackground(chatMenuCallback.chat.id, data[i].chapters[j].url, "White");
         }
             
     } else { // not random
         let n = data.length;
-        for(let i = 0; i < n; ++i){
-            if(chatMenuCallback.button_callback == data[i].cb){
-
-                let m = data[i].chapters.length;
-                for(let j = 0; j < m; ++j){
-                    if(!data[i].chapters[j].url && data[i].chapters[j].path){
-                        if(!data[i].chapters[j].id){
-                            api.sendTextWithBackground(chatMenuCallback.chat.id, "جاري إرسال السورة");
-                            MediaTransfer.uploadFile(TOKEN, data[i].chapters[j].path, config.UploadServer)
-                            .then(uploadedAudioId => {
-                                audioOutMsg.chat_id = chatMenuCallback.chat.id;
-                                audioOutMsg.reference = Id();
-                                audioOutMsg.audio = uploadedAudioId;
-                                data[i].chapters[j].id = uploadedAudioId; 
-                                audioOutMsg.performer = data[i].ename;
-                                audioOutMsg.title = data[i].chapters[j].caname;
-                                audioOutMsg.caption = data[i].aname+" رواية حفص عن عاصم بصوت الشيخ ";
-                                api.send(JSON.stringify(audioOutMsg));
-                            })
-                            .catch(e => console.error("Upload failed", e));
-                        }else{
+        for(let i = 0; i < n ; ++i){
+            if(chatMenuCallback.button_callback == "CB"+i){
+                m = data[i].chapters.length;
+                k = i;
+            }
+        }
+        for(let j = 0; j < m; ++j){
+            if(chatMenuCallback.button_callback == "VCB"+j){
+                if(!data[k].chapters[j].url && data[k].chapters[j].path){
+                    if(!data[k].chapters[j].id){
+                        api.sendTextWithBackground(chatMenuCallback.chat.id, "جاري إرسال السورة", "White");
+                        MediaTransfer.uploadFile(TOKEN, data[k].chapters[j].path, config.UploadServer)
+                        .then(uploadedAudioId => {
                             audioOutMsg.chat_id = chatMenuCallback.chat.id;
                             audioOutMsg.reference = Id();
-                            audioOutMsg.audio = data[i].chapters[j].id 
-                            audioOutMsg.performer = data[i].ename;
-                            audioOutMsg.title =  data[i].chapters[j].caname;
-                            audioOutMsg.caption =  data[i].aname+" رواية حفص عن عاصم بصوت الشيخ ";
+                            audioOutMsg.audio = uploadedAudioId;
+                            data[k].chapters[j].id = uploadedAudioId;
+                            fs.writeFile("./data.json", JSON.stringify(data));
+                            audioOutMsg.performer = data[k].ename;
+                            audioOutMsg.title = data[k].chapters[j].caname;
+                            audioOutMsg.caption = data[k].aname+" رواية حفص عن عاصم بصوت الشيخ ";
                             api.send(JSON.stringify(audioOutMsg));
-                        }
-                    }else if(data[i].chapters[j].url){
-                        api.sendTextWithBackground(chatMenuCallback.chat.id, data[i].chapters[j].url);
+                        })
+                        .catch(e => console.error("Upload failed", e));
+                    }else{
+                        audioOutMsg.chat_id = chatMenuCallback.chat.id;
+                        audioOutMsg.reference = Id();
+                        audioOutMsg.audio = data[k].chapters[j].id 
+                        audioOutMsg.performer = data[k].ename;
+                        audioOutMsg.title =  data[k].chapters[j].caname;
+                        audioOutMsg.caption =  data[k].aname+" رواية حفص عن عاصم بصوت الشيخ ";
+                        api.send(JSON.stringify(audioOutMsg));
                     }
+                }else if(data[k].chapters[j].url){
+                    api.sendTextWithBackground(chatMenuCallback.chat.id, data[k].chapters[j].url, "White");
                 }
             }
         }
@@ -154,10 +157,10 @@ client.connect(TOKEN, nCallBack);
 
 let sendBotMenuWithNavigationButton = (chatId) => {
     Utility.setNavigationButton(chatId, 'MainMenu', api);
-    api.send(JSON.stringify(createMainMenu(chatId)));
+    api.send(JSON.stringify(createMainMenu(chatId, names[0], names[1])));
 }
 
-let createMainMenu = chatId => {
+let createMainMenu = (chatId, first_array, second_array) => {
         
     let setChatMainMenu = new SetChatMenuOutMessage();
     let btns = [];
@@ -177,8 +180,8 @@ let createMainMenu = chatId => {
     
     let mainMenu = [];
     mainMenu.push(chatMainMenu)
-    mainMenu.push(createSingleBtnRows(reciters, 'CB', 'SecondMenu', '#2ED473', 'Black', 'ThirdMenu', 'MainMenu'));
-    mainMenu.push(createSingleBtnRows(verses, 'VCB', 'ThirdMenu', '#2ED473', 'Black', null, 'SecondMenu'));
+    mainMenu.push(createSingleBtnRows(first_array, 'CB', 'SecondMenu', '#2ED473', 'Black', 'ThirdMenu', 'MainMenu'));
+    mainMenu.push(createSingleBtnRows(second_array, 'VCB', 'ThirdMenu', '#2ED473', 'Black', null, 'SecondMenu'));
 
     setChatMainMenu.menus = mainMenu;
     setChatMainMenu.chat_id = chatId;
