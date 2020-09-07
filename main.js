@@ -15,7 +15,7 @@ let path = require("path");
 let data = require("./data.json");
 const names = require('./names.json');
 
-const TOKEN = "90091905646805157:0:KJpEx7SpSMcvlEiGutryONSlMqEvRM";
+const TOKEN = "90091863386469751:0:ZwGqaQBOxMmXja41XgHYEPjmEKAQql";
 const config = {
     URI: "wss://w1.nandbox.net:5020/nandbox/api/",
     DownloadServer: "https://w1.nandbox.net:5020/nandbox/download/",
@@ -38,7 +38,6 @@ nCallBack.onConnect = (_api) => {
     // it will go here if the bot connected to the server successfully 
     api = _api;
     console.log("Authenticated");
-    // sendBotMenuWithNavigationButton(); TODO: get chat id 
 }
 
 
@@ -61,74 +60,88 @@ nCallBack.onError = () => console.log("ONERROR");
 let k = 0, m;
 nCallBack.onChatMenuCallBack = chatMenuCallback => {
     let audioOutMsg = new AudioOutMessage();
-    if(chatMenuCallback.button_callback == 'rndm'){
+    if(chatMenuCallback.button_callback == 'rndm'){ // random
         let i = Math.floor(Math.random()*N);
         let j = Math.floor(Math.random()*N);
-        if(!data[i].chapters[j].url && data[i].chapters[j].path){
-            if(!data[i].chapters[j].id){
+        if(data[i].chapters[j].url == null && data[i].chapters[j].path){
+            if(data[i].chapters[j].id == null){
                 api.sendTextWithBackground(chatMenuCallback.chat.id, "جاري إرسال السورة", "White");
                 MediaTransfer.uploadFile(TOKEN, data[i].chapters[j].path, config.UploadServer)
                 .then(uploadedAudioId => {
-                    audioOutMsg.chat_id = chatMenuCallback.chat.id;
-                    audioOutMsg.reference = Id();
-                    audioOutMsg.audio = uploadedAudioId;
-                    data[i].chapters[j].id = uploadedAudioId;
-                    fs.writeFile("./data.json", data); 
-                    audioOutMsg.performer = data[i].ename;
-                    audioOutMsg.title = data[i].chapters[j].caname;
-                    audioOutMsg.caption = data[i].aname+" رواية حفص عن عاصم بصوت الشيخ ";
-                    api.send(JSON.stringify(audioOutMsg));
+                    if(uploadedAudioId){
+                        audioOutMsg.chat_id = chatMenuCallback.chat.id;
+                        audioOutMsg.reference = Id();
+                        audioOutMsg.audio = uploadedAudioId;
+                        data[i].chapters[j].id = uploadedAudioId;
+                        fs.writeFile("./data.json", data); 
+                        audioOutMsg.performer = data[i].ename;
+                        audioOutMsg.title = data[i].chapters[j].caname;
+                        audioOutMsg.caption = data[i].aname+" رواية حفص عن عاصم ";
+                        api.send(JSON.stringify(audioOutMsg));
+                    } else {
+                        console.error("upload failed, try again"); 
+                        api.sendTextWithBackground(chatMenuCallback.chat.id, "فشل الإرسال", "White");
+                    }
                 })
                 .catch(e => console.error("Upload failed", e));
-            }else{
+            }else if(data[i].chapters[j].id != null){
                 audioOutMsg.chat_id = chatMenuCallback.chat.id;
                 audioOutMsg.reference = Id();
                 audioOutMsg.audio = data[i].chapters[j].id; 
                 audioOutMsg.performer = data[i].ename;
                 audioOutMsg.title =  data[i].chapters[j].caname;;
-                audioOutMsg.caption =  data[i].aname+" رواية حفص عن عاصم بصوت الشيخ ";
+                audioOutMsg.caption =  data[i].aname+" رواية حفص عن عاصم  ";
                 api.send(JSON.stringify(audioOutMsg));
             }
-        }else if(data[i].chapters[j].url){
+        }else if(data[i].chapters[j].url == null && data[i].chapters[j].path){
             api.sendTextWithBackground(chatMenuCallback.chat.id, data[i].chapters[j].url, "White");
         }
             
     } else { // not random
-        let n = data.length;
-        for(let i = 0; i < n ; ++i){
+        let n = data.length, i;
+        for(i = 0; i < n ; i++){
             if(chatMenuCallback.button_callback == "CB"+i){
                 m = data[i].chapters.length;
                 k = i;
+                break;
             }
         }
-        for(let j = 0; j < m; ++j){
+        console.log("k = ", k +" , "+ i);
+        for(let j = 0; j < m; j++){
             if(chatMenuCallback.button_callback == "VCB"+j){
-                if(!data[k].chapters[j].url && data[k].chapters[j].path){
-                    if(!data[k].chapters[j].id){
+                if(data[k].chapters[j].url == null && data[k].chapters[j].path){
+                    if(data[k].chapters[j].id == null){
                         api.sendTextWithBackground(chatMenuCallback.chat.id, "جاري إرسال السورة", "White");
                         MediaTransfer.uploadFile(TOKEN, data[k].chapters[j].path, config.UploadServer)
                         .then(uploadedAudioId => {
-                            audioOutMsg.chat_id = chatMenuCallback.chat.id;
-                            audioOutMsg.reference = Id();
-                            audioOutMsg.audio = uploadedAudioId;
-                            data[k].chapters[j].id = uploadedAudioId;
-                            fs.writeFile("./data.json", JSON.stringify(data));
-                            audioOutMsg.performer = data[k].ename;
-                            audioOutMsg.title = data[k].chapters[j].caname;
-                            audioOutMsg.caption = data[k].aname+" رواية حفص عن عاصم بصوت الشيخ ";
-                            api.send(JSON.stringify(audioOutMsg));
+                            if(uploadedAudioId){
+                                console.log(data[k].chapters[j].path);
+                                audioOutMsg.chat_id = chatMenuCallback.chat.id;
+                                audioOutMsg.reference = Id();
+                                audioOutMsg.audio = uploadedAudioId;
+                                data[k].chapters[j].id = uploadedAudioId;
+                                fs.writeFile("./data.json", JSON.stringify(data));
+                                audioOutMsg.performer = data[k].ename;
+                                audioOutMsg.title = data[k].chapters[j].caname;
+                                audioOutMsg.caption = data[k].aname+" رواية حفص عن عاصم ";
+                                api.send(JSON.stringify(audioOutMsg));
+                            } else{
+                                console.error("upload failed, try again"); 
+                                api.sendTextWithBackground(chatMenuCallback.chat.id, "فشل الإرسال", "White");
+                            } 
+                                
                         })
                         .catch(e => console.error("Upload failed", e));
-                    }else{
+                    }else if(data[k].chapters[j].id != null){
                         audioOutMsg.chat_id = chatMenuCallback.chat.id;
                         audioOutMsg.reference = Id();
                         audioOutMsg.audio = data[k].chapters[j].id 
                         audioOutMsg.performer = data[k].ename;
                         audioOutMsg.title =  data[k].chapters[j].caname;
-                        audioOutMsg.caption =  data[k].aname+" رواية حفص عن عاصم بصوت الشيخ ";
+                        audioOutMsg.caption =  data[k].aname+" رواية حفص عن عاصم ";
                         api.send(JSON.stringify(audioOutMsg));
                     }
-                }else if(data[k].chapters[j].url){
+                }else if(data[k].chapters[j].url && data[k].chapters[j].path == null){
                     api.sendTextWithBackground(chatMenuCallback.chat.id, data[k].chapters[j].url, "White");
                 }
             }
@@ -137,7 +150,8 @@ nCallBack.onChatMenuCallBack = chatMenuCallback => {
 }
 nCallBack.onInlineMessageCallback = inlineMsgCallback => { }
 nCallBack.onMessagAckCallback = msgAck => { }
-nCallBack.onUserJoinedBot = user => { 
+nCallBack.onUserJoinedBot = user => {
+    api.sendTextWithBackground(chatMenuCallback.chat.id, "السلام عليكم,ابدأ الاستمع الآن", "White");
     sendBotMenuWithNavigationButton(user.id);
 }
 nCallBack.onChatMember = chatMember => { }
