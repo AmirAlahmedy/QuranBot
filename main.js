@@ -15,11 +15,11 @@ let path = require("path");
 let data = require("./data.json");
 const names = require('./names.json');
 
-const TOKEN = "90091863386469751:0:ZwGqaQBOxMmXja41XgHYEPjmEKAQql";
+const TOKEN = "90091784125966321:0:Y02UYbuyqqi5FHcis2u4XgT3GqTndm";
 const config = {
-    URI: "wss://w1.nandbox.net:5020/nandbox/api/",
-    DownloadServer: "https://w1.nandbox.net:5020/nandbox/download/",
-    UploadServer: "https://w1.nandbox.net:5020/nandbox/upload/"
+    URI: "wss://d1.nandbox.net:5020/nandbox/api/",
+    DownloadServer: "https://d1.nandbox.net:5020/nandbox/download/",
+    UploadServer: "https://d1.nandbox.net:5020/nandbox/upload/"
 }
 
 
@@ -112,9 +112,11 @@ nCallBack.onChatMenuCallBack = chatMenuCallback => {
                 if(data[k].chapters[j].url == null && data[k].chapters[j].path){
                     if(data[k].chapters[j].id == null){
                         api.sendTextWithBackground(chatMenuCallback.chat.id, "جاري إرسال السورة", "White");
+                        console.log(k, j);
                         MediaTransfer.uploadFile(TOKEN, data[k].chapters[j].path, config.UploadServer)
                         .then(uploadedAudioId => {
                             if(uploadedAudioId){
+                                console.log(k, j);
                                 console.log(data[k].chapters[j].path);
                                 audioOutMsg.chat_id = chatMenuCallback.chat.id;
                                 audioOutMsg.reference = Id();
