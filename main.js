@@ -15,7 +15,7 @@ let path = require("path");
 let data = require("./data.json");
 const names = require('./names.json');
 
-const TOKEN = "90091784125966321:0:Y02UYbuyqqi5FHcis2u4XgT3GqTndm";
+const TOKEN = "90091784125966321:0:LPAUV3XpFdu7qG7Ajc9CakNJBtZPqX";
 const config = {
     URI: "wss://d1.nandbox.net:5020/nandbox/api/",
     DownloadServer: "https://d1.nandbox.net:5020/nandbox/download/",
@@ -63,7 +63,7 @@ nCallBack.onChatMenuCallBack = chatMenuCallback => {
     if(chatMenuCallback.button_callback == 'rndm'){ // random
         let i = Math.floor(Math.random()*N);
         let j = Math.floor(Math.random()*N);
-        if(data[i].chapters[j].url == null && data[i].chapters[j].path){
+        if(data[i].chapters[j].path){
             if(data[i].chapters[j].id == null){
                 api.sendTextWithBackground(chatMenuCallback.chat.id, "جاري إرسال السورة", "White");
                 MediaTransfer.uploadFile(TOKEN, data[i].chapters[j].path, config.UploadServer)
@@ -81,6 +81,7 @@ nCallBack.onChatMenuCallBack = chatMenuCallback => {
                     } else {
                         console.error("upload failed, try again"); 
                         api.sendTextWithBackground(chatMenuCallback.chat.id, "فشل الإرسال", "White");
+                        api.sendTextWithBackground(chatMenuCallback.chat.id, data[i].chapters[j].url, "White");
                     }
                 })
                 .catch(e => console.error("Upload failed", e));
@@ -93,7 +94,7 @@ nCallBack.onChatMenuCallBack = chatMenuCallback => {
                 audioOutMsg.caption =  data[i].aname+" رواية حفص عن عاصم  ";
                 api.send(JSON.stringify(audioOutMsg));
             }
-        }else if(data[i].chapters[j].url == null && data[i].chapters[j].path){
+        }else if(data[i].chapters[j].url){
             api.sendTextWithBackground(chatMenuCallback.chat.id, data[i].chapters[j].url, "White");
         }
             
@@ -109,7 +110,7 @@ nCallBack.onChatMenuCallBack = chatMenuCallback => {
         console.log("k = ", k +" , "+ i);
         for(let j = 0; j < m; j++){
             if(chatMenuCallback.button_callback == "VCB"+j){
-                if(data[k].chapters[j].url == null && data[k].chapters[j].path){
+                if(data[k].chapters[j].path){
                     if(data[k].chapters[j].id == null){
                         api.sendTextWithBackground(chatMenuCallback.chat.id, "جاري إرسال السورة", "White");
                         console.log(k, j);
@@ -130,6 +131,7 @@ nCallBack.onChatMenuCallBack = chatMenuCallback => {
                             } else{
                                 console.error("upload failed, try again"); 
                                 api.sendTextWithBackground(chatMenuCallback.chat.id, "فشل الإرسال", "White");
+                                api.sendTextWithBackground(chatMenuCallback.chat.id, data[k].chapters[j].url, "White");
                             } 
                                 
                         })
@@ -143,7 +145,7 @@ nCallBack.onChatMenuCallBack = chatMenuCallback => {
                         audioOutMsg.caption =  data[k].aname+" رواية حفص عن عاصم ";
                         api.send(JSON.stringify(audioOutMsg));
                     }
-                }else if(data[k].chapters[j].url && data[k].chapters[j].path == null){
+                }else if(data[k].chapters[j].url){
                     api.sendTextWithBackground(chatMenuCallback.chat.id, data[k].chapters[j].url, "White");
                 }
             }
