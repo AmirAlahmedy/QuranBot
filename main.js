@@ -15,7 +15,7 @@ let path = require("path");
 let data = require("./data.json");
 const names = require('./names.json');
 
-const TOKEN = "90091784125966321:0:LPAUV3XpFdu7qG7Ajc9CakNJBtZPqX";
+const TOKEN = "90091783807989434:0:zRv8YU0gKaCIe3GHLcWB3R47Ju5hEW";
 const config = {
     URI: "wss://d1.nandbox.net:5020/nandbox/api/",
     DownloadServer: "https://d1.nandbox.net:5020/nandbox/download/",
