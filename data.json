@@ -58,6 +58,72 @@
         "caname": "التوبة"
       },
       {
+        "path": null,
+        "url": "https://server10.mp3quran.net/minsh/010.mp3",
+        "id": null,
+        "caname": "يونس"
+      },
+      {
+        "path": null,
+        "url": "https://server10.mp3quran.net/minsh/011.mp3",
+        "id": null,
+        "caname": "هود"
+      },
+      {
+        "path": null,
+        "url": "https://server10.mp3quran.net/minsh/012.mp3",
+        "id": null,
+        "caname": "يوسف"
+      },
+      {
+        "path": null,
+        "url": "https://server10.mp3quran.net/minsh/013.mp3",
+        "id": null,
+        "caname": "الرعد"
+      },
+      {
+        "path": null,
+        "url": "https://server10.mp3quran.net/minsh/014.mp3",
+        "id": null,
+        "caname": "إبراهيم"
+      },
+      {
+        "path": null,
+        "url": "https://server10.mp3quran.net/minsh/015.mp3",
+        "id": null,
+        "caname": "الحجر"
+      },
+      {
+        "path": null,
+        "url": "https://server10.mp3quran.net/minsh/016.mp3",
+        "id": null,
+        "caname": "النحل"
+      },
+      {
+        "path": null,
+        "url": "https://server10.mp3quran.net/minsh/017.mp3",
+        "id": null,
+        "caname": "الإسراء"
+      },
+      {
+        "path": null,
+        "url": "https://server10.mp3quran.net/minsh/018.mp3",
+        "id": null,
+        "caname": "الكهف"
+      },
+      {
+        "path": null,
+        "url": "https://server10.mp3quran.net/minsh/019.mp3",
+        "id": null,
+        "caname": "مريم"
+      },
+      {
+        "path": null,
+        "url": "https://server10.mp3quran.net/minsh/020.mp3",
+        "id": null,
+        "caname": "طه"
+      },
+      {
         "path": "./chapters/minshawi/055.mp3",
         "url": "https://server10.mp3quran.net/minsh/055.mp3",
         "id": null,
@@ -124,6 +190,72 @@
         "caname": "التوبة"
       },
       {
+        "path": null,
+        "url": "https://server7.mp3quran.net/basit/Almusshaf-Al-Mojawwad/010.mp3",
+        "id": null,
+        "caname": "يونس"
+      },
+      {
+        "path": null,
+        "url": "https://server7.mp3quran.net/basit/Almusshaf-Al-Mojawwad/011.mp3",
+        "id": null,
+        "caname": "هود"
+      },
+      {
+        "path": null,
+        "url": "https://server7.mp3quran.net/basit/Almusshaf-Al-Mojawwad/012.mp3",
+        "id": null,
+        "caname": "يوسف"
+      },
+      {
+        "path": null,
+        "url": "https://server7.mp3quran.net/basit/Almusshaf-Al-Mojawwad/013.mp3",
+        "id": null,
+        "caname": "الرعد"
+      },
+      {
+        "path": null,
+        "url": "https://server7.mp3quran.net/basit/Almusshaf-Al-Mojawwad/014.mp3",
+        "id": null,
+        "caname": "إبراهيم"
+      },
+      {
+        "path": null,
+        "url": "https://server7.mp3quran.net/basit/Almusshaf-Al-Mojawwad/015.mp3",
+        "id": null,
+        "caname": "الحجر"
+      },
+      {
+        "path": null,
+        "url": "https://server7.mp3quran.net/basit/Almusshaf-Al-Mojawwad/016.mp3",
+        "id": null,
+        "caname": "النحل"
+      },
+      {
+        "path": null,
+        "url": "https://server7.mp3quran.net/basit/Almusshaf-Al-Mojawwad/017.mp3",
+        "id": null,
+        "caname": "الإسراء"
+      },
+      {
+        "path": null,
+        "url": "https://server7.mp3quran.net/basit/Almusshaf-Al-Mojawwad/018.mp3",
+        "id": null,
+        "caname": "الكهف"
+      },
+      {
+        "path": null,
+        "url": "https://server7.mp3quran.net/basit/Almusshaf-Al-Mojawwad/019.mp3",
+        "id": null,
+        "caname": "مريم"
+      },
+      {
+        "path": null,
+        "url": "https://server7.mp3quran.net/basit/Almusshaf-Al-Mojawwad/020.mp3",
+        "id": null,
+        "caname": "طه"
+      },
+      {
         "path": "./chapters/baset/055.mp3",
         "url": "https://server7.mp3quran.net/basit/Almusshaf-Al-Mojawwad/055.mp3",
         "id": null,
@@ -188,6 +320,72 @@
         "url": "https://server13.mp3quran.net/husr/009.mp3",
         "id": null,
         "caname": "التوبة"
+      },
+      {
+        "path": null,
+        "url": "https://server13.mp3quran.net/husr/010.mp3",
+        "id": null,
+        "caname": "يونس"
+      },
+      {
+        "path": null,
+        "url": "https://server13.mp3quran.net/husr/011.mp3",
+        "id": null,
+        "caname": "هود"
+      },
+      {
+        "path": null,
+        "url": "https://server13.mp3quran.net/husr/012.mp3",
+        "id": null,
+        "caname": "يوسف"
+      },
+      {
+        "path": null,
+        "url": "https://server13.mp3quran.net/husr/013.mp3",
+        "id": null,
+        "caname": "الرعد"
+      },
+      {
+        "path": null,
+        "url": "https://server13.mp3quran.net/husr/014.mp3",
+        "id": null,
+        "caname": "إبراهيم"
+      },
+      {
+        "path": null,
+        "url": "https://server13.mp3quran.net/husr/015.mp3",
+        "id": null,
+        "caname": "الحجر"
+      },
+      {
+        "path": null,
+        "url": "https://server13.mp3quran.net/husr/016.mp3",
+        "id": null,
+        "caname": "النحل"
+      },
+      {
+        "path": null,
+        "url": "https://server13.mp3quran.net/husr/017.mp3",
+        "id": null,
+        "caname": "الإسراء"
+      },
+      {
+        "path": null,
+        "url": "https://server13.mp3quran.net/husr/018.mp3",
+        "id": null,
+        "caname": "الكهف"
+      },
+      {
+        "path": null,
+        "url": "https://server13.mp3quran.net/husr/019.mp3",
+        "id": null,
+        "caname": "مريم"
+      },
+      {
+        "path": null,
+        "url": "https://server13.mp3quran.net/husr/020.mp3",
+        "id": null,
+        "caname": "طه"
       },
       {
         "path": "./chapters/hosary/055.mp3",
