@@ -1,1 +1,200 @@
-[{"aname":"المنشاوي","ename":"minshawi","chapters":[{"path":"./chapters/minshawi/001.mp3","url":null,"id":"d753b4b54399ccb2553d7b4110a25a4a030e13679bc50adb681aeda9827ca3fa.mp3","caname":"الفاتحة"},{"path":null,"url":"https://server10.mp3quran.net/minsh/002.mp3","id":null,"caname":"البقرة"},{"path":"./chapters/minshawi/055.mp3","url":"https://server10.mp3quran.net/minsh/055.mp3","id":null,"caname":"الرحمن"}]},{"aname":"عبد الباسط عبد الصمد","ename":"baset","chapters":[{"path":"./chapters/baset/001.mp3","url":null,"id":"b9b3180e7357d3b8959351528a56d6c0cf92096f40f193c20cedab2f2c8b13fe.mp3","caname":"الفاتحة"},{"path":null,"url":"https://server7.mp3quran.net/basit/002.mp3","id":null,"caname":"البقرة"},{"path":"./chapters/baset/055.mp3","url":"https://server7.mp3quran.net/basit/Almusshaf-Al-Mojawwad/055.mp3","id":null,"caname":"الرحمن"}]},{"aname":"الحصري","ename":"hosary","chapters":[{"path":"./chapters/hosary/001.mp3","url":null,"caname":"الفاتحة","id":"10c3b4d95cfe2ad4dabdcc1bf65c7f4e1bb76af3d15fa5555aafa1808722afd3.mp3"},{"path":null,"url":"https://server13.mp3quran.net/husr/002.mp3","id":null,"caname":"البقرة"},{"path":"./chapters/hosary/055.mp3","url":"https://server13.mp3quran.net/husr/055.mp3","id":null,"caname":"الرحمن"}]}]
+[
+  {
+    "aname": "المنشاوي",
+    "ename": "minshawi",
+    "chapters": [
+      {
+        "path": "./chapters/minshawi/001.mp3",
+        "url": null,
+        "id": "d753b4b54399ccb2553d7b4110a25a4a030e13679bc50adb681aeda9827ca3fa.mp3",
+        "caname": "الفاتحة"
+      },
+      {
+        "path": null,
+        "url": "https://server10.mp3quran.net/minsh/002.mp3",
+        "id": null,
+        "caname": "البقرة"
+      },
+      {
+        "path": null,
+        "url": "https://server10.mp3quran.net/minsh/003.mp3",
+        "id": null,
+        "caname": "آل عمران"
+      },
+      {
+        "path": null,
+        "url": "https://server10.mp3quran.net/minsh/004.mp3",
+        "id": null,
+        "caname": "النساء"
+      },
+      {
+        "path": null,
+        "url": "https://server10.mp3quran.net/minsh/005.mp3",
+        "id": null,
+        "caname": "المائدة"
+      },
+      {
+        "path": null,
+        "url": "https://server10.mp3quran.net/minsh/006.mp3",
+        "id": null,
+        "caname": "الأنعام"
+      },
+      {
+        "path": null,
+        "url": "https://server10.mp3quran.net/minsh/007.mp3",
+        "id": null,
+        "caname": "الأعراف"
+      },
+      {
+        "path": null,
+        "url": "https://server10.mp3quran.net/minsh/008.mp3",
+        "id": null,
+        "caname": "الأنفال"
+      },
+      {
+        "path": null,
+        "url": "https://server10.mp3quran.net/minsh/009.mp3",
+        "id": null,
+        "caname": "التوبة"
+      },
+      {
+        "path": "./chapters/minshawi/055.mp3",
+        "url": "https://server10.mp3quran.net/minsh/055.mp3",
+        "id": null,
+        "caname": "الرحمن"
+      }
+    ]
+  },
+  {
+    "aname": "عبد الباسط عبد الصمد",
+    "ename": "baset",
+    "chapters": [
+      {
+        "path": "./chapters/baset/001.mp3",
+        "url": null,
+        "id": "b9b3180e7357d3b8959351528a56d6c0cf92096f40f193c20cedab2f2c8b13fe.mp3",
+        "caname": "الفاتحة"
+      },
+      {
+        "path": null,
+        "url": "https://server7.mp3quran.net/basit/002.mp3",
+        "id": null,
+        "caname": "البقرة"
+      },
+      {
+        "path": null,
+        "url": "https://server7.mp3quran.net/basit/Almusshaf-Al-Mojawwad/003.mp3",
+        "id": null,
+        "caname": "آل عمران"
+      },
+      {
+        "path": null,
+        "url": "https://server7.mp3quran.net/basit/Almusshaf-Al-Mojawwad/004.mp3",
+        "id": null,
+        "caname": "النساء"
+      },
+      {
+        "path": null,
+        "url": "https://server7.mp3quran.net/basit/Almusshaf-Al-Mojawwad/005.mp3",
+        "id": null,
+        "caname": "المائدة"
+      },
+      {
+        "path": null,
+        "url": "https://server7.mp3quran.net/basit/Almusshaf-Al-Mojawwad/006.mp3",
+        "id": null,
+        "caname": "الأنعام"
+      },
+      {
+        "path": null,
+        "url": "https://server7.mp3quran.net/basit/Almusshaf-Al-Mojawwad/007.mp3",
+        "id": null,
+        "caname": "الأعراف"
+      },
+      {
+        "path": null,
+        "url": "https://server7.mp3quran.net/basit/Almusshaf-Al-Mojawwad/008.mp3",
+        "id": null,
+        "caname": "الأنفال"
+      },
+      {
+        "path": null,
+        "url": "https://server7.mp3quran.net/basit/Almusshaf-Al-Mojawwad/009.mp3",
+        "id": null,
+        "caname": "التوبة"
+      },
+      {
+        "path": "./chapters/baset/055.mp3",
+        "url": "https://server7.mp3quran.net/basit/Almusshaf-Al-Mojawwad/055.mp3",
+        "id": null,
+        "caname": "الرحمن"
+      }
+    ]
+  },
+  {
+    "aname": "الحصري",
+    "ename": "hosary",
+    "chapters": [
+      {
+        "path": "./chapters/hosary/001.mp3",
+        "url": null,
+        "caname": "الفاتحة",
+        "id": "10c3b4d95cfe2ad4dabdcc1bf65c7f4e1bb76af3d15fa5555aafa1808722afd3.mp3"
+      },
+      {
+        "path": null,
+        "url": "https://server13.mp3quran.net/husr/002.mp3",
+        "id": null,
+        "caname": "البقرة"
+      },
+      {
+        "path": null,
+        "url": "https://server13.mp3quran.net/husr/003.mp3",
+        "id": null,
+        "caname": "آل عمران"
+      },
+      {
+        "path": null,
+        "url": "https://server13.mp3quran.net/husr/004.mp3",
+        "id": null,
+        "caname": "النساء"
+      },
+      {
+        "path": null,
+        "url": "https://server13.mp3quran.net/husr/005.mp3",
+        "id": null,
+        "caname": "المائدة"
+      },
+      {
+        "path": null,
+        "url": "https://server13.mp3quran.net/husr/006.mp3",
+        "id": null,
+        "caname": "الأنعام"
+      },
+      {
+        "path": null,
+        "url": "https://server13.mp3quran.net/husr/007.mp3",
+        "id": null,
+        "caname": "الأعراف"
+      },
+      {
+        "path": null,
+        "url": "https://server13.mp3quran.net/husr/008.mp3",
+        "id": null,
+        "caname": "الأنفال"
+      },
+      {
+        "path": null,
+        "url": "https://server13.mp3quran.net/husr/009.mp3",
+        "id": null,
+        "caname": "التوبة"
+      },
+      {
+        "path": "./chapters/hosary/055.mp3",
+        "url": "https://server13.mp3quran.net/husr/055.mp3",
+        "id": null,
+        "caname": "الرحمن"
+      }
+    ]
+  }
+]
