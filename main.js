@@ -38,6 +38,7 @@ nCallBack.onConnect = (_api) => {
     // it will go here if the bot connected to the server successfully 
     api = _api;
     console.log("Authenticated");
+    sendBotMenuWithNavigationButton(Nand.BOT_ID);
 }
 
 
