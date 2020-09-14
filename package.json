@@ -10,7 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "file-system": "^2.2.2",
-    "nandbox-bot-api": "^1.2.2",
+    "nandbox-bot-api": "^1.2.5",
     "path": "^0.12.7"
   },
   "devDependencies": {
