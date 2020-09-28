@@ -10,15 +10,10 @@
   "license": "MIT",
   "dependencies": {
     "file-system": "^2.2.2",
-<<<<<<< HEAD
     "nandbox-bot-api": "^1.2.2",
     "path": "^0.12.7",
     "winston": "^3.3.3",
     "winston-daily-rotate-file": "^4.5.0"
-=======
-    "nandbox-bot-api": "^1.2.5",
-    "path": "^0.12.7"
->>>>>>> 914cc27c08981bff4c17024c987e7dcc33f6aa6e
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",

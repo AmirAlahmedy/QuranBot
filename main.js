@@ -15,7 +15,6 @@ let path = require("path");
 let data = require("./data.json");
 const names = require('./names.json');
 
-<<<<<<< HEAD
 /*------------------------------------------------------------------------------*/
 /*----------------------------logger--------------------------------------------*/
 const winston = require('winston');
@@ -32,9 +31,6 @@ let  logger = winston.createLogger({
 });
 /*------------------------------------------------------------------------------*/
 const TOKEN = "90091903321704167:0:UH6trZhM8FbmbigaV4NraBsBTrbJEP";
-=======
-const TOKEN = "90091903321704167:0:zC3DA2POQma9HimpXCbKRnF8tqDQEU";
->>>>>>> 914cc27c08981bff4c17024c987e7dcc33f6aa6e
 const config = {
     URI: "wss://w1.nandbox.net:5020/nandbox/api/",
     DownloadServer: "https://w1.nandbox.net:5020/nandbox/download/",
