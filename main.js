@@ -15,7 +15,22 @@ let path = require("path");
 let data = require("./data.json");
 const names = require('./names.json');
 
-const TOKEN = "90091783807989434:0:zRv8YU0gKaCIe3GHLcWB3R47Ju5hEW";
+/*------------------------------------------------------------------------------*/
+/*----------------------------logger--------------------------------------------*/
+const winston = require('winston');
+const error_file = path.join(__dirname, './error.log');
+const info_file = path.join(__dirname, './info.log');
+const DailyRotateFile = require('winston-daily-rotate-file');
+let  logger = winston.createLogger({
+	level: 'info',
+	transports: [
+		// new winston.transports.Console(),
+		new winston.transports.DailyRotateFile({filename:error_file, level:'error', maxSize: '5m', maxFiles: '5d'}),
+		new winston.transports.DailyRotateFile({filename:info_file,  maxSize: '5m', maxFiles: '5d'})
+	]
+});
+/*------------------------------------------------------------------------------*/
+const TOKEN = "90091903321704167:0:UH6trZhM8FbmbigaV4NraBsBTrbJEP";
 const config = {
     URI: "wss://d1.nandbox.net:5020/nandbox/api/",
     DownloadServer: "https://d1.nandbox.net:5020/nandbox/download/",
@@ -38,6 +53,7 @@ nCallBack.onConnect = (_api) => {
     // it will go here if the bot connected to the server successfully 
     api = _api;
     console.log("Authenticated");
+    logger.info("Authenticated");
     sendBotMenuWithNavigationButton(Nand.BOT_ID);
 }
 
@@ -45,6 +61,7 @@ nCallBack.onConnect = (_api) => {
 
 nCallBack.onReceive = incomingMsg => {
     console.log("Message Received");
+    logger.info("Message Received");
 
     if (incomingMsg.isTextMsg()) {
         let chatId = incomingMsg.chat.id; // get your chat Id
@@ -54,10 +71,18 @@ nCallBack.onReceive = incomingMsg => {
 }
 
 // implement other nandbox.Callback() as per your bot need
-nCallBack.onReceiveObj = obj => console.log("received object: ", obj);
-nCallBack.onClose = () => console.log("ONCLOSE");
-nCallBack.onError = () => console.log("ONERROR");
-
+nCallBack.onReceiveObj = obj => {
+    console.log("received object: ", obj);
+    logger.info("received object: ", obj);
+}
+nCallBack.onClose = () => {
+    console.log("ONCLOSE");
+    logger.info("ONCLOSE");
+}
+nCallBack.onError = () => {
+    console.log("ONERROR");
+    logger.info("ONERROR");
+}
 let k = 0, m;
 nCallBack.onChatMenuCallBack = chatMenuCallback => {
     let audioOutMsg = new AudioOutMessage();
@@ -81,11 +106,15 @@ nCallBack.onChatMenuCallBack = chatMenuCallback => {
                         api.send(JSON.stringify(audioOutMsg));
                     } else {
                         console.error("upload failed, try again"); 
+                        logger.error("upload failed, try again"); 
                         api.sendTextWithBackground(chatMenuCallback.chat.id, "فشل الإرسال", "White");
                         api.sendTextWithBackground(chatMenuCallback.chat.id, data[i].chapters[j].url, "White");
                     }
                 })
-                .catch(e => console.error("Upload failed", e));
+                .catch(e => { 
+                    console.error("Upload failed", e)
+                    logger.error("Upload failed"+e)
+                 });
             }else if(data[i].chapters[j].id != null){
                 audioOutMsg.chat_id = chatMenuCallback.chat.id;
                 audioOutMsg.reference = Id();
@@ -108,7 +137,6 @@ nCallBack.onChatMenuCallBack = chatMenuCallback => {
                 break;
             }
         }
-        console.log("k = ", k +" , "+ i);
         for(let j = 0; j < m; j++){
             if(chatMenuCallback.button_callback == "VCB"+j){
                 if(data[k].chapters[j].path){
@@ -118,8 +146,6 @@ nCallBack.onChatMenuCallBack = chatMenuCallback => {
                         MediaTransfer.uploadFile(TOKEN, data[k].chapters[j].path, config.UploadServer)
                         .then(uploadedAudioId => {
                             if(uploadedAudioId){
-                                console.log(k, j);
-                                console.log(data[k].chapters[j].path);
                                 audioOutMsg.chat_id = chatMenuCallback.chat.id;
                                 audioOutMsg.reference = Id();
                                 audioOutMsg.audio = uploadedAudioId;
@@ -131,12 +157,16 @@ nCallBack.onChatMenuCallBack = chatMenuCallback => {
                                 api.send(JSON.stringify(audioOutMsg));
                             } else{
                                 console.error("upload failed, try again"); 
+                                logger.error("upload failed, try again"); 
                                 api.sendTextWithBackground(chatMenuCallback.chat.id, "فشل الإرسال", "White");
                                 api.sendTextWithBackground(chatMenuCallback.chat.id, data[k].chapters[j].url, "White");
                             } 
                                 
                         })
-                        .catch(e => console.error("Upload failed", e));
+                        .catch(e => { 
+                            console.error("Upload failed", e);
+                            logger.error("Upload failed"+ e);
+                        });
                     }else if(data[k].chapters[j].id != null){
                         audioOutMsg.chat_id = chatMenuCallback.chat.id;
                         audioOutMsg.reference = Id();

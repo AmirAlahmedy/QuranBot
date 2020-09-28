@@ -1,0 +1,14 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 5
+    },
+    "auditLog": "C:\\Users\\admin\\Desktop\\quran-bot\\.37fa4a5b9b8394d9c601c401028bb46550bdfb3f-audit.json",
+    "files": [
+        {
+            "date": 1601296070741,
+            "name": "C:\\Users\\admin\\Desktop\\quran-bot\\info.log.2020-09-28",
+            "hash": "8884b2c80fe7e6ed0b60b2970f2227f5"
+        }
+    ]
+}
