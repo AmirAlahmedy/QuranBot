@@ -30,7 +30,7 @@ let  logger = winston.createLogger({
 	]
 });
 /*------------------------------------------------------------------------------*/
-const TOKEN = "90092049883065839:0:3bWA5gVs4tiLWgDBbHv8gpbTyRxLeo";
+const TOKEN = "90092129821315279:0:yOhEmbt12TlCYBtLNFVqSoeDcusPqK";
 const config = {
     URI: "wss://w1.nandbox.net:5020/nandbox/api/",
     DownloadServer: "https://w1.nandbox.net:5020/nandbox/download/",
