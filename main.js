@@ -186,7 +186,7 @@ nCallBack.onChatMenuCallBack = chatMenuCallback => {
 nCallBack.onInlineMessageCallback = inlineMsgCallback => { }
 nCallBack.onMessagAckCallback = msgAck => { }
 nCallBack.onUserJoinedBot = user => {
-    api.sendTextWithBackground(user.id, "السلام عليكم,ابدأ الاستمع الآن", "White");
+    api.sendTextWithBackground(user.id, "السلام عليكم,ابدأ الاستماع الآن", "White");
     sendBotMenuWithNavigationButton(user.id);
 }
 nCallBack.onChatMember = chatMember => { }
