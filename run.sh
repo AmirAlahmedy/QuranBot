@@ -1,1 +1,1 @@
-nohup node main.js &>  nohup.out &
+nohup node quranbot-main.js &>  nohup.out &
