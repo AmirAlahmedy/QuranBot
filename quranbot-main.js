@@ -91,7 +91,7 @@ nCallBack.onChatMenuCallBack = chatMenuCallback => {
         let j = Math.floor(Math.random()*N);
         if(data[i].chapters[j].path){
             if(data[i].chapters[j].id == null){
-                api.sendTextWithBackground(chatMenuCallback.chat.id, "جاري إرسال السورة", "White");
+                api.sendText(chatMenuCallback.chat.id, "جاري إرسال السورة");
                 MediaTransfer.uploadFile(TOKEN, data[i].chapters[j].path, config.UploadServer)
                 .then(uploadedAudioId => {
                     if(uploadedAudioId){
@@ -107,8 +107,8 @@ nCallBack.onChatMenuCallBack = chatMenuCallback => {
                     } else {
                         console.error("upload failed, try again"); 
                         logger.error("upload failed, try again"); 
-                        api.sendTextWithBackground(chatMenuCallback.chat.id, "فشل الإرسال", "White");
-                        api.sendTextWithBackground(chatMenuCallback.chat.id, data[i].chapters[j].url, "White");
+                        api.sendText(chatMenuCallback.chat.id, "فشل الإرسال");
+                        api.sendText(chatMenuCallback.chat.id, data[i].chapters[j].url);
                     }
                 })
                 .catch(e => { 
@@ -125,7 +125,7 @@ nCallBack.onChatMenuCallBack = chatMenuCallback => {
                 api.send(JSON.stringify(audioOutMsg));
             }
         }else if(data[i].chapters[j].url){
-            api.sendTextWithBackground(chatMenuCallback.chat.id, data[i].chapters[j].url, "White");
+            api.sendText(chatMenuCallback.chat.id, data[i].chapters[j].url);
         }
             
     } else { // not random
@@ -141,7 +141,7 @@ nCallBack.onChatMenuCallBack = chatMenuCallback => {
             if(chatMenuCallback.button_callback == "VCB"+j){
                 if(data[k].chapters[j].path){
                     if(data[k].chapters[j].id == null){
-                        api.sendTextWithBackground(chatMenuCallback.chat.id, "جاري إرسال السورة", "White");
+                        api.sendText(chatMenuCallback.chat.id, "جاري إرسال السورة");
                         console.log(k, j);
                         MediaTransfer.uploadFile(TOKEN, data[k].chapters[j].path, config.UploadServer)
                         .then(uploadedAudioId => {
@@ -158,8 +158,8 @@ nCallBack.onChatMenuCallBack = chatMenuCallback => {
                             } else{
                                 console.error("upload failed, try again"); 
                                 logger.error("upload failed, try again"); 
-                                api.sendTextWithBackground(chatMenuCallback.chat.id, "فشل الإرسال", "White");
-                                api.sendTextWithBackground(chatMenuCallback.chat.id, data[k].chapters[j].url, "White");
+                                api.sendText(chatMenuCallback.chat.id, "فشل الإرسال");
+                                api.sendText(chatMenuCallback.chat.id, data[k].chapters[j].url);
                             } 
                                 
                         })
@@ -177,7 +177,7 @@ nCallBack.onChatMenuCallBack = chatMenuCallback => {
                         api.send(JSON.stringify(audioOutMsg));
                     }
                 }else if(data[k].chapters[j].url){
-                    api.sendTextWithBackground(chatMenuCallback.chat.id, data[k].chapters[j].url, "White");
+                    api.sendText(chatMenuCallback.chat.id, data[k].chapters[j].url);
                 }
             }
         }
@@ -186,7 +186,7 @@ nCallBack.onChatMenuCallBack = chatMenuCallback => {
 nCallBack.onInlineMessageCallback = inlineMsgCallback => { }
 nCallBack.onMessagAckCallback = msgAck => { }
 nCallBack.onUserJoinedBot = user => {
-    api.sendTextWithBackground(user.id, "السلام عليكم,ابدأ الاستماع الآن", "White");
+    api.sendText(user.id, "السلام عليكم,ابدأ الاستماع الآن");
     sendBotMenuWithNavigationButton(user.id);
 }
 nCallBack.onChatMember = chatMember => { }
