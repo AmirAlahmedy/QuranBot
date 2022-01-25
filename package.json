@@ -10,7 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "file-system": "^2.2.2",
-    "nandbox-bot-api": "^1.2.2",
+    "nandbox-bot-api": "^1.2.31",
     "path": "^0.12.7",
     "winston": "^3.3.3",
     "winston-daily-rotate-file": "^4.5.0"
